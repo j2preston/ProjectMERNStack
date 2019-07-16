@@ -43,4 +43,14 @@ routerCar.get('/:car_id', (req, res) => {
     })
 })
 
+// @route update api/cars/:car_id
+// @desc allows the user to update a specific car
+routerCar.put('/:car_id', (req, res, next) => {
+    Car.findByIdAndUpdate({_id: req.params.car_id}, req.body).then(()=>{
+      Car.findOne({_id: req.params.car_id}).then((car)=>{
+        res.send(car)
+      })
+    })
+})
+
 module.exports = routerCar;
